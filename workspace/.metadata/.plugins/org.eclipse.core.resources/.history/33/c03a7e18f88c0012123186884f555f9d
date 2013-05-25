@@ -1,0 +1,21 @@
+<html>
+<head>
+</head>
+<body>
+	<section class="search ac" style="padding: 15px;">
+		<div style="padding-bottom: 10px;">
+			Logo goes here
+			<div>Search smarter.  Live better.</div>
+		</div>
+		<div class="ui-widget">
+	        <input autocomplete="off" id="SearchText" name="SearchText" type="text" />
+			<input class="btn-search" type="button" value="" />
+		</div>
+		<div style="margin-top: 10px;">-------- or --------</div>
+		<div class="clr"></div>
+		<div class="geo-btn-search" style="width: auto; line-height: 36px; margin-top: 10px; background-color: #e66500; color: #fff; border-radius: 2px; -webkit-border-radius: 2px; box-shadow: 0px 1px 4px #888; cursor: pointer; font-weight: bold;">
+			Find apartments near me
+		</div>
+	</section>	
+</body>
+</html>

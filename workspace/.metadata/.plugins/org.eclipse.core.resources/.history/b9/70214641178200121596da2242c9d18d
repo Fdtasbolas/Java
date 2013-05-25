@@ -1,0 +1,203 @@
+/**
+
+PX to EM sizing chart:with 16px being the base size on the body
+	
+10px	=	0.625em		=	62.5%
+11px	=	0.688em		=	68.8%
+12px	=	0.750em		=	75%
+13px	=	0.813em		=	81.3%
+14px	=	0.875em		=	87.5%
+15px	=	0.938em		=	93.8%
+
+16px	=	1.000em		=	100%
+
+18px	=	1.125em		=	112.5%
+19px	=	1.188em		=	118.8%
+20px	=	1.250em		=	125%
+21px	=	1.313em		=	131.3%
+22px	=	1.375em		=	137.5%
+23px	=	1.438em		=	143.8%
+24px	=	1.500em		=	150%
+
+**/
+
+
+/*************/
+/* Web Fonts */
+/*************/
+
+@font-face {
+    font-family:HelvNeue;
+    src:url('../fonts/HelveticaBold.eot');
+    src:url('../fonts/HelveticaBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/HelveticaBold.woff') format('woff'),
+         url('../fonts/HelveticaBold.ttf') format('truetype'),
+         url('../fonts/HelveticaBold.svg#HelvNeue') format('svg');
+    font-weight:normal;
+    font-style:normal;
+}
+
+
+
+/**************/
+/**   BASE   **/
+/**************/
+
+body {
+background:#e4dace;
+font-family:'Helvetica Neue', Helvetica, Arial;
+color:#444;
+}
+
+
+/**************/
+/**   SEARCH   **/
+/**************/
+.search {
+margin-bottom:35px;
+}
+
+/* Search Type Textfield
+******************************************/
+.search input[type="text"] {
+top:0px;
+font-size:18px;
+font-weight:normal;
+padding-right:37px;
+color:#aaa;
+width:200px;/*590px*/
+height:37px;
+line-height:normal;
+display:inline-block;
+}
+
+.search input[type="text"].active {
+color:#666;
+}
+
+
+/* Search Submit
+******************************************/
+.search .btn-search {
+background:transparent url('../images/af_sprite.png') no-repeat -130px -295px;
+width:78px;
+height:39px;
+border-width:0;
+display:inline-block;
+line-height:38px;
+}
+
+.search .btn-search:hover {
+background-position:-209px -295px;
+}
+
+.search .btn-search:active {
+background-position:-288px -295px;
+}
+
+
+/* Search Auto Suggest
+*******************************************/
+
+.ui-autocomplete {
+display:none;
+width:auto;
+position:absolute;
+text-align:left;
+font-size:12px;
+color:#444;
+padding:2px;
+border:1px solid #ddd;
+background:#fff;
+box-shadow:0px 0px 6px #888;
+-moz-box-shadow:0px 0px 6px #888;
+-webkit-box-shadow:0px 0px 6px #888;
+box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; -khtml-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box;
+border-radius:2px 2px 5px 5px; -moz-border-radius:2px 2px 5px 5px; -webkit-border-radius:2px 2px 5px 5px; -khtml-border-radius:2px 2px 5px 5px; -ms-border-radius:2px 2px 5px 5px; -o-border-radius:0 0 5px 5px;
+}
+
+.ui-autocomplete li.ui-autocomplete-category {
+display:block;
+padding:2px 5px;
+font-size:12px;
+font-weight:bold;
+color:#999;
+background:#eee;
+border-bottom:1px solid #ddd;
+}
+
+.ui-autocomplete li {
+float:left;
+clear:both;
+margin:1px 0;
+width:100%;
+box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; -khtml-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box;
+}
+
+.ui-autocomplete a {
+display:block;
+float:left;
+clear:both;
+width:100%;
+color:#333;
+font-weight:bold;
+padding:5px 0;
+text-indent:10px;
+box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; -khtml-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box;
+}
+
+.ui-autocomplete a.ui-state-hover,
+.ui-autocomplete a.ui-state-hover:hover {
+color:#fff;
+background:#ff7000;
+}
+
+.ui-autocomplete .county,
+.ui-autocomplete .county-state {
+width:50%;
+display:inline-block;
+float:left;
+box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; -khtml-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box;
+}
+
+.ui-autocomplete .county-state {
+text-align:right;
+}
+
+.ui-autocomplete a.ui-state-hover em {
+background:#ff7000;
+color:#fff;
+font-weight:normal;
+}
+
+.ui-autocomplete a.ui-state-hover:hover em {
+background:#ff7000;
+}
+
+.ui-autocomplete em {
+color:#333;
+}
+
+/* AutoComplete: Home Page */
+.ui-autocomplete  {
+width:200px !important;
+left:50px !important;
+}
+
+
+.list-view .results {
+/*padding-top:0px;*/
+background:#fff;
+z-index:1;
+}
+
+/* List View - Photo
+***********************************/
+
+.list-view .listing .photo {
+height:150px;
+width:150px;
+overflow:hidden;
+border:1px solid #ddd;
+float:left;
+}
