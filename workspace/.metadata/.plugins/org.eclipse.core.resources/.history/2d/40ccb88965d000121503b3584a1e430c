@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Android Garage Door Opener V1.0</title>
+<style>
+body{
+	font-family: arial, Sans-serif;
+}
+.case{
+	width:300px; height: 400px; 
+	background-color: #000; 
+	-moz-border-radius: 15px; 
+	border-radius: 15px;
+}
+.host{
+	margin-left: 20px; 
+	margin-top: 20px; 
+	padding: 4px;
+	float: left; 
+	color: #666;
+	border: solid 1px #666;
+	background-color: #FFF;
+	-moz-border-radius: 4px; 
+	border-radius: 5px; 
+	font-weight: bold;
+	display: none;
+}
+#host{
+	border: 0px;
+	color: #666;
+	font-size: 18px;
+}
+.btn-host{
+	cursor: pointer; 
+	padding: 3px;
+	width: 140px; 
+	height: 40px; 
+	background-color: #666; 
+	color: #CCC;
+	font-weight: bold;
+	text-align: center; 
+	-moz-border-radius: 3px; 
+	border-radius: 3px; 
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+}
+.btn-garage{
+	cursor: pointer; 
+	margin-left: 12px; 
+	margin-top: 10px; 
+	float: left; 
+	width: 132px; 
+	height: 200px; 
+	background-color: #CCC; 
+	font-size: 48pt; 
+	text-align: center; 
+	-moz-border-radius: 5px; 
+	border-radius: 5px; 
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+}
+.btn-garage.up{
+	background-color: red;
+}
+.btn-garage.down{
+	background-color: green;
+}
+.btn-garage.pressed{
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+</style>
+</head>
+<body>
+<div class="case">
+	<div class="host">
+		<input id="host" type="text" value="http://" />
+		<span id="btnSaveHost" class="btn-host">Save</span>
+	</div>
+	<div class="buttons">
+		<div id="door1" data-door="1" class="btn-garage">I</div>
+		<div id="door2" data-door="2" class="btn-garage">II</div>
+	</div>
+</div>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script src="./scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+	var monitor;
+	var host;
+	$(document).ready(function ($) {
+        document.addEventListener("deviceready", onDeviceReady, false);
+        
+        if(localStorage.getItem('host') != null){
+        	host = localStorage.getItem('host');
+        	setupOpener();
+		}
+		else{	        
+        	$('.btn-host').click(function(){ onHostButtonClick(setupOpener); });
+			showHost();	
+		}
+	});
+	
+	function onHostButtonClick(callback){
+		host = $('#host').val();
+		localStorage.setItem('host', host);
+		$('.host').hide();
+		$('.buttons').show();
+       	if(callback) callback();
+	}
+	
+	function showHost(){
+		$('.host').show();
+		$('.buttons').hide();	
+		$('#host').focus();	
+	}
+	
+	function setupOpener(){
+		$('#door1').click(onButtonClick);
+		$('#door2').click(onButtonClick);		
+		getGarageStatus();
+		monitor = setInterval(getGarageStatus, 10000);	
+	}
+	
+	function onButtonClick(){
+		var button = $(this);
+		var door = button.data('door');
+		openGarage(door); 
+		button.addClass('pressed');
+		setTimeout(function(){ button.removeClass('pressed'); },250); 
+	}
+	
+	function onDeviceReady(){
+		document.addEventListener("pause", function(){  
+			clearInterval(monitor);
+		}, false);
+		document.addEventListener("resume", function(){ 
+			monitor = setInterval(getGarageStatus, 10000); 
+		}, false);	
+	}
+		
+	function getGarageStatus(){
+		var url = host + '?status';
+		$.ajaxSetup({
+		 	cache: false
+		});
+		$.getJSON(url, null, function(data, textStatus, jqXHR) {
+	        var doorStatus = data;
+	        
+	        var door1Status = doorStatus.Door1.indexOf('Open') > -1 ? 'up' : 'down';
+	        setButtonStatus($('#door1'), door1Status);
+	        
+	        var door2Status = doorStatus.Door2.indexOf('Open') > -1 ? 'up' : 'down';
+	        setButtonStatus($('#door2'), door2Status);
+	        
+	    });
+	}
+	
+	function setButtonStatus(button, status){
+		if(status == 'up') {
+        	button.removeClass('down').addClass('up'); 
+    	}
+    	else{ 
+        	button.removeClass('up').addClass('down');         	
+    	}
+	}
+
+	function openGarage(door) {
+		$.ajaxSetup({
+		 	cache: false
+		});
+		var url = host + '?door=' + door.toString();
+		 $.getJSON(url, null, function(data) {
+	        console.log(data);
+	    });
+	}
+</script>
+</body>
+</html>
